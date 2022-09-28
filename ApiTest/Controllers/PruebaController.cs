@@ -35,9 +35,8 @@ namespace ApiTest.Controllers
                         return  new KeyValuePair<string, string>(x.Key, x.Value);
                     });
 
-                var word = String.Concat(palabra.OrderBy(y => y));
 
-                var result = map.Where(x =>_palabraServicios.EsAnagrama(x.Key, word).Result)
+                var result = map.Where(x =>_palabraServicios.EsAnagrama(x.Key, palabra).Result)
                     .Select(x=> new Palabra { Valor = x.Key }).ToList();
 
                 if (!result.Any())
