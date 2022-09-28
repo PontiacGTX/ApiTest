@@ -37,7 +37,7 @@ namespace ApiTest.Controllers
 
 
                 var result = map.Where(x =>_palabraServicios.EsAnagrama(x.Key, palabra).Result)
-                    .Select(x=> new Palabra { Valor = x.Key }).ToList();
+                    .Select(x=> new Palabra { Valor = x.Value }).ToList();
 
                 if (!result.Any())
                     return StatusCode(StatusCodes.Status404NotFound, new { Data = result, Success = true, Message = "Not Found", StatusCode = 404 });
