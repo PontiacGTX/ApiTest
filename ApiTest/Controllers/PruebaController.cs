@@ -1,4 +1,5 @@
-﻿using ApiTest.Repository;
+﻿using ApiTest.Models;
+using ApiTest.Repository;
 using ApiTest.Servicios;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
