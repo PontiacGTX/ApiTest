@@ -29,6 +29,7 @@ namespace ApiTest.Controllers
 
             try
             {
+               
                 var map =await _palabraRepositorio.Get(x => x.Key.Length == palabra.Length,select:
                     x=>
                     {
@@ -61,8 +62,19 @@ namespace ApiTest.Controllers
             try
             {
                var existe=await _palabraRepositorio.Any(body.Valor);
+                if (existe)
+                    return Ok(new
+                    {
+                        Data = (await _palabraRepositorio.Get(x => x.Key.Length == body.Valor.Length, select:
+                        x =>
+                        {
+                            return new KeyValuePair<string, string>(x.Key, x.Value);
+                        })).Select(x=>x),
+                        StatusCode=200,
+                        Success=true,
+                        Message="Ok"
+                    });
                 string result = null;
-                if (!existe)
                     result = await _palabraRepositorio.Add(body.Valor);
 
                 return Ok(new { Data = result, Success = true, Message = "Ok", StatusCode = 200 });
